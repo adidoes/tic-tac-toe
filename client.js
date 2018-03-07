@@ -21,13 +21,11 @@ var boardRows = {
 };
 
 var sendReq = function(room, command, value, callback) {
-  var payload = JSON.stringify(
-    (data = {
-      room: room,
-      command: command,
-      value: value
-    })
-  );
+  var payload = JSON.stringify({
+    room: room,
+    command: command,
+    value: value
+  });
 
   var options = {
     hostname: "127.0.0.1",
