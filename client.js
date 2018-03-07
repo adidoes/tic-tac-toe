@@ -52,27 +52,17 @@ var sendReq = function(room, command, value, callback) {
   request.end();
 };
 
-var printBoard = function() {
-  console.log('\n' +
-      ' ' + (board.board[0][0] || ' ') + ' | ' + (board.board[0][1] || ' ') + ' | ' + (board.board[0][2] || ' ') + '\n' +
-      ' ---------\n' +
-      ' ' + (board.board[1][0] || ' ') + ' | ' + (board.board[1][1] || ' ') + ' | ' + (board.board[1][2] || ' ') + '\n' +
-      ' ---------\n' +
-      ' ' + (board.board[2][0] || ' ') + ' | ' + (board.board[2][1] || ' ') + ' | ' + (board.board[2][2] || ' ') + '\n');
-
-};
-
 var setEventListeners = function(isPlayer) {
   if (isPlayer) {
     board.on("board:set", function(event) {
       var is_your_move = event.symbol == board.symbol;
       if (is_your_move) {
         sendReq(room, "set", event, onOpponentMove);
-        printBoard();
+        board.printCli();
         console.log("Waiting for other player to move");
         board.enabled = false;
       } else {
-        printBoard();
+        board.printCli();
         console.log("Your turn. Enter a cell from 1 to 9");
         board.enabled = true;
       }
